@@ -31,12 +31,15 @@ export default function AuthPage() {
       if (pErr) return setMsg(pErr.message);
     }
 
-    setMsg("Account created! Check your email if confirmation is required.");
+    setMsg("Account created! Check your email if required.");
   }
 
   async function signIn() {
     setMsg("");
-    const { error } = await supabase.auth.signInWithPassword({ email, password: pw });
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password: pw
+    });
     if (error) setMsg(error.message);
   }
 
@@ -46,43 +49,40 @@ export default function AuthPage() {
 
   return (
     <div style={{ maxWidth: 420 }}>
-      <h2 style={{ marginTop: 0 }}>Sign in to AITube</h2>
+      <h2>Sign in to AITube</h2>
 
       {session ? (
         <>
-          <div style={{ marginBottom: 12 }}>Signed in as {session.user.email}</div>
+          <p>Signed in as {session.user.email}</p>
           <button onClick={signOut}>Sign out</button>
         </>
       ) : (
         <>
-          <label>Email</label>
           <input
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{ width: "100%", padding: 10, margin: "6px 0 12px" }}
           />
+          <br />
 
-          <label>Password</label>
           <input
             type="password"
+            placeholder="Password"
             value={pw}
             onChange={(e) => setPw(e.target.value)}
-            style={{ width: "100%", padding: 10, margin: "6px 0 12px" }}
           />
+          <br />
 
-          <label>Username (for sign up)</label>
           <input
+            placeholder="Username (signup)"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            style={{ width: "100%", padding: 10, margin: "6px 0 12px" }}
           />
+          <br />
 
-          <div style={{ display: "flex", gap: 10 }}>
-            <button onClick={signIn}>Sign in</button>
-            <button onClick={signUp}>Create account</button>
-          </div>
-
-          {msg && <div style={{ marginTop: 12 }}>{msg}</div>}
+          <button onClick={signIn}>Sign in</button>
+          <button onClick={signUp}>Create account</button>
+          {msg && <p>{msg}</p>}
         </>
       )}
     </div>
