@@ -8,7 +8,10 @@ export default function RootLayout({ children }) {
           <a href="/" style={{ fontWeight: 800, textDecoration: "none", color: "inherit" }}>AITube</a>
           <div style={{ marginLeft: "auto", display: "flex", gap: 12 }}>
             <a href="/auth">Sign in</a>
-          </div>
+          <div style={{ marginLeft: "auto", display: "flex", gap: 12 }}>
+  <a href="/auth">Sign in</a>
+</div>
+
         </div>
         <div style={{ maxWidth: 980, margin: "0 auto", padding: 16 }}>{children}</div>
       </body>
